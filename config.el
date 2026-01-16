@@ -74,6 +74,13 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(add-to-list 'exec-path "/home/trasha/.cargo/bin")
+(setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH")))
+
+(use-package! eglot-booster
+  :after eglot
+  :config (eglot-booster-mode 1))
+
 (setq treesit-extra-load-path
       (let ((profiles (split-string (or (getenv "NIX_PROFILES") ""))))
         (cl-loop for profile in profiles
@@ -86,29 +93,13 @@
   (setq treesit-auto-install 'prompt)
   (global-treesit-auto-mode))
 
-(after! eglot)
-(add-to-list 'company-backends 'company-capf)
-
-(use-package! astro-ts-mode
-  :mode "\\.astro\\'"
-  :config
-  (setq-default treesit-font-lock-level 4))
-
-(add-hook 'astro-ts-mode-hook #'eglot-ensure)
+(after! eglot
+  (setq completion-category-defaults nil)
+  (add-to-list 'company-backends 'company-capf))
 
 (use-package! rainbow-delimiters)
 (add-hook! 'prog-mode-hook #'rainbow-delimiters-mode)
 
-(use-package! eglot-booster
-  :after eglot
-  :config (eglot-booster-mode 1))
 
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-
-(use-package! mmm-mode
-  :config
-  (setq mmm-global-mode 'maybe)
-  (mmm-add-mode-ext-class 'html-mode nil 'html-js)
-  (setq mmm-submode-decoration-level 2))
-
