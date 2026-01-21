@@ -58,3 +58,4 @@
 (package! eglot-booster
   :recipe (:host github
            :repo "jdtsmith/eglot-booster"))
+(package! svelte-mode)

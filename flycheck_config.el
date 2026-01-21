@@ -77,23 +77,25 @@
 (add-to-list 'exec-path "/home/trasha/.cargo/bin")
 (setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH")))
 
-(use-package! rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
 (use-package! eglot-booster
   :after eglot
   :config (eglot-booster-mode 1))
 
 (setq treesit-extra-load-path
-      (append (list (expand-file-name "tree-sitter" doom-cache-dir))
-              (let ((profiles (split-string (or (getenv "NIX_PROFILES") ""))))
-                (cl-loop for profile in profiles
-                         append (list (expand-file-name "lib/tree-sitter" profile)
-                                      (expand-file-name "lib" profile))))))
+      (let ((profiles (split-string (or (getenv "NIX_PROFILES") ""))))
+        (cl-loop for profile in profiles
+                 for path = (expand-file-name "tree-sitter" profile)
+                 when (file-directory-p path)
+                 collect path)))
+
+(use-package! treesit-auto)
 
 (after! eglot
   (setq completion-category-defaults nil)
   (add-to-list 'company-backends 'company-capf))
+
+(use-package! rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package! svelte-mode
   :mode "\\.svelte\\'"
