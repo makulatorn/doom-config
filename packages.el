@@ -52,10 +52,8 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
-(package! astro-ts-mode)
 (package! rainbow-delimiters)
 (package! aggressive-indent)
 (package! eglot-booster
   :recipe (:host github
            :repo "jdtsmith/eglot-booster"))
-(package! svelte-mode)

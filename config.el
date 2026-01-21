@@ -95,10 +95,5 @@
   (setq completion-category-defaults nil)
   (add-to-list 'company-backends 'company-capf))
 
-(use-package! svelte-mode
-  :mode "\\.svelte\\'"
-  :config
-  (setq svelte-basic-offset 2))
-
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
