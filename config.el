@@ -97,3 +97,13 @@
 
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
+(use-package! completion-preview
+  :hook (prog-mode . completion-preview-mode)
+  :config
+  (setq completion-preview-minimum-symbol-length 2
+        completion-preview-idle-delay 0.05))
+(after! company
+  (setq company-idle-delay 0.5))
+(add-hook 'text-mode-hook #'completion-preview-mode)
+(add-hook 'conf-mode-hook #'completion-preview-mode)
