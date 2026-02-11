@@ -101,8 +101,9 @@
 (use-package! completion-preview
   :hook (prog-mode . completion-preview-mode)
   :config
-  (setq completion-preview-minimum-symbol-length 2
+  (setq completion-preview-minimum-symbol-length 1
         completion-preview-idle-delay 0.05))
+
 (after! company
   (setq company-idle-delay 0.5))
 (add-hook 'text-mode-hook #'completion-preview-mode)
