@@ -108,3 +108,9 @@
   (setq company-idle-delay 0.5))
 (add-hook 'text-mode-hook #'completion-preview-mode)
 (add-hook 'conf-mode-hook #'completion-preview-mode)
+
+(map! :g "M-1" #'centaur-tabs-backward
+      :g "M-2" #'centaur-tabs-forward)
+(map! :nv "M-<left>" #'+workspace/switch-left
+      :nv "M-<right>" #'+workspace/switch-right)
+(setq +workspace-cycle-wrap t)
