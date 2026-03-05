@@ -81,12 +81,12 @@
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
-       ;;eshell            ; the elisp shell that works everywhere
+       eshell            ; the elisp shell that works everywhere
        ;;shell             ; simple shell REPL for Emacs
        ;;term              ; basic terminal emulator for Emacs
-       vterm             ; the best terminal emulation in Emacs
+       ;; vterm             ; the best terminal emulation in Emacs
 
-       :checkers
+       ;; :checkers
        (syntax +childframe)              ; tasing you for every semicolon you forget
        (spell +flyspell) ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
@@ -104,10 +104,10 @@
        (lookup +dictionary +docsets +offline)              ; navigate your code and its documentation
        ;;llm               ; when I said you needed friends, I didn't mean...
        (lsp +eglot)      ; M-x vscode
-       ;; magit             ; a git porcelain for Emacs
+       magit             ; a git porcelain for Emacs
        make                 ; run make tasks from Emacs
        ;; pass              ; password manager for nerds
-       ;; pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;; terraform         ; infrastructure as code
        ;; tmux              ; an API for interacting with tmux
        (tree-sitter +everywhere)          ; syntax and parsing, sitting in a tree...

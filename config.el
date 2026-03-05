@@ -114,3 +114,12 @@
 (map! :nv "M-<left>" #'+workspace/switch-left
       :nv "M-<right>" #'+workspace/switch-right)
 (setq +workspace-cycle-wrap t)
+
+(setq-default tab-width 2
+              evil-shift-width 2)
+(setq css-indent-offset 2
+      js-indent-level 2
+      typescript-indent-level 2
+      web-mode-code-indent-offset 2
+      we-mode-css-indent-offset 2
+      web-mode-markup-indent-offset 2)
