@@ -124,9 +124,10 @@
       we-mode-css-indent-offset 2
       web-mode-markup-indent-offset 2)
 
-(use-package blamer
+(use-package! blamer
   :bind (("s-i" . blamer-show-commit-info))
-  :defer 20
+  :init
+  (global-blamer-mode 1)
   :custom
   (blamer-idle-time 0.3)
   (blamer-min-offset 70)
@@ -136,4 +137,6 @@
                    :height 100
                    :italic t)))
   :config
-  (global-blamer-mode 1))
+  (setq blamer-prettify-time-p nil
+        blamer-datetime-formatter "[%s]"
+        blamer-entire-formatter " %s"))

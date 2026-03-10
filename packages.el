@@ -61,3 +61,5 @@
            :repo "jdtsmith/eglot-booster"))
 
 (package! blamer)
+
+(package! posframe)
