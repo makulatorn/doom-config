@@ -63,3 +63,5 @@
 (package! blamer)
 
 (package! posframe)
+
+(package! eldoc-box)

@@ -140,3 +140,11 @@
   (setq blamer-prettify-time-p nil
         blamer-datetime-formatter "[%s]"
         blamer-entire-formatter " %s"))
+
+(use-package! eldoc-box
+  :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
+  :config
+  (setq eldoc-box-max-pixel-width 600
+        eldoc-box-max-pixel-height 400
+        eldoc-box-frame-parameters
+        '((alpha . 85))))
