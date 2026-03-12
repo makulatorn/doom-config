@@ -76,13 +76,11 @@
 ;; they are implemented.
 (add-to-list 'exec-path "/home/trasha/.cargo/bin")
 (setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH")))
+(when (memq window-system '(x pgtk))
+  (exec-path-from-shell-initialize))
 
 (use-package! rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package! eglot-booster
-  :after eglot
-  :config (eglot-booster-mode 1))
 
 (setq treesit-extra-load-path
       (append (list (expand-file-name "tree-sitter" doom-cache-dir))
@@ -133,7 +131,6 @@
   (blamer-min-offset 70)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
-                   :background nil
                    :height 100
                    :italic t)))
   :config
@@ -146,5 +143,22 @@
   :config
   (setq eldoc-box-max-pixel-width 600
         eldoc-box-max-pixel-height 400
+        eldoc-box-offset '(30 . 20)
         eldoc-box-frame-parameters
-        '((alpha . 85))))
+        '((alpha . 85)
+          (undecorated . t))))
+
+(after! eglot
+  (setq-default eglot-workspace-configuration
+                `((:basedpyright . (:analysis (:typeCheckingMode "basic"
+                                               :autoImportCompletions t
+                                               :extraPaths [,(expand-file-name
+                                                              (concat "~/.nix-profile/lib/python"
+                                                                      (string-trim (shell-command-to-string "python3 -c 'import sys; print(f\"{sys.version_info.major}.{sys.version_info.minor}\")'"))
+                                                                      "/site-packages"))])))
+                  (:python . (:hover (:contentFormat ["plaintext"]))))))
+(set-eglot-client! 'python-mode '("basedpyright-langserver" "--stdio"))
+(add-hook 'eglot-managed-mode-hook
+          (lambda ()
+            (setq-local eglot-client-capabilities
+                        '(:textDocument (:hover (:contentFormat ["plaintext"]))))))
