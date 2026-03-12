@@ -84,10 +84,14 @@
 
 ;; LSP & Python
 (after! lsp-mode
-  (setq lsp-pyright-type-checking-mode "basic"
+  (setq lsp-pyright-langserver-command "basedpyright"
+        lsp-pyright-type-checking-mode "basic"
         lsp-pyright-auto-import-completions t
         lsp-headerline-breadcrumb-enable nil
-        lsp-ui-doc-enable nil)
+        lsp-ui-doc-enable nil
+        lsp-eldoc-render-all t
+        lsp-signature-auto-activate t
+        lsp-signature-render-documentation t)
 
   (let ((nix-python-path (expand-file-name
                           (concat "~/.nix-profile/lib/python"
@@ -100,7 +104,6 @@
   (add-hook 'python-mode-hook
             (lambda ()
               (setq-local lsp-enabled-clients '(pyright ruff)))))
-
 (setq +format-on-save-enabled-modes '(python-mode))
 
 (after! apheleia
