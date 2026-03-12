@@ -3,82 +3,17 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-symbol-font' -- for symbols
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-homage-black)
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
+;; Path and Environment Logic
 (add-to-list 'exec-path "/home/trasha/.cargo/bin")
 (setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH")))
 (when (memq window-system '(x pgtk))
   (exec-path-from-shell-initialize))
 
+;; Packages & Modes
 (use-package! rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -88,10 +23,6 @@
                 (cl-loop for profile in profiles
                          append (list (expand-file-name "lib/tree-sitter" profile)
                                       (expand-file-name "lib" profile))))))
-
-(after! eglot
-  (setq completion-category-defaults nil)
-  (add-to-list 'company-backends 'company-capf))
 
 (global-aggressive-indent-mode 1)
 (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
@@ -107,21 +38,23 @@
 (add-hook 'text-mode-hook #'completion-preview-mode)
 (add-hook 'conf-mode-hook #'completion-preview-mode)
 
+;; Keybindings & Workspaces
 (map! :g "M-1" #'centaur-tabs-backward
       :g "M-2" #'centaur-tabs-forward)
 (map! :nv "M-<left>" #'+workspace/switch-left
       :nv "M-<right>" #'+workspace/switch-right)
 (setq +workspace-cycle-wrap t)
 
+;; Indentation Defaults
 (setq-default tab-width 2
               evil-shift-width 2)
 (setq css-indent-offset 2
       js-indent-level 2
       typescript-indent-level 2
       web-mode-code-indent-offset 2
-      we-mode-css-indent-offset 2
       web-mode-markup-indent-offset 2)
 
+;; Git Blame
 (use-package! blamer
   :bind (("s-i" . blamer-show-commit-info))
   :init
@@ -138,8 +71,9 @@
         blamer-datetime-formatter "[%s]"
         blamer-entire-formatter " %s"))
 
+;; Eldoc Box (The working version)
 (use-package! eldoc-box
-  :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
+  :hook (lsp-mode . eldoc-box-hover-at-point-mode)
   :config
   (setq eldoc-box-max-pixel-width 600
         eldoc-box-max-pixel-height 400
@@ -148,17 +82,29 @@
         '((alpha . 85)
           (undecorated . t))))
 
-(after! eglot
-  (setq-default eglot-workspace-configuration
-                `((:basedpyright . (:analysis (:typeCheckingMode "basic"
-                                               :autoImportCompletions t
-                                               :extraPaths [,(expand-file-name
-                                                              (concat "~/.nix-profile/lib/python"
-                                                                      (string-trim (shell-command-to-string "python3 -c 'import sys; print(f\"{sys.version_info.major}.{sys.version_info.minor}\")'"))
-                                                                      "/site-packages"))])))
-                  (:python . (:hover (:contentFormat ["plaintext"]))))))
-(set-eglot-client! 'python-mode '("basedpyright-langserver" "--stdio"))
-(add-hook 'eglot-managed-mode-hook
-          (lambda ()
-            (setq-local eglot-client-capabilities
-                        '(:textDocument (:hover (:contentFormat ["plaintext"]))))))
+;; LSP & Python
+(after! lsp-mode
+  (setq lsp-pyright-type-checking-mode "basic"
+        lsp-pyright-auto-import-completions t
+        lsp-headerline-breadcrumb-enable nil
+        lsp-ui-doc-enable nil)
+
+  (let ((nix-python-path (expand-file-name
+                          (concat "~/.nix-profile/lib/python"
+                                  (string-trim (shell-command-to-string "python3 -c 'import sys; print(f\"{sys.version_info.major}.{sys.version_info.minor}\")'"))
+                                  "/site-packages"))))
+    (setq lsp-pyright-extra-paths (vector nix-python-path))))
+
+(after! python
+  (setq-hook! 'python-mode-hook +format-with-ruff-ts-mode t)
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local lsp-enabled-clients '(pyright ruff)))))
+
+(setq +format-on-save-enabled-modes '(python-mode))
+
+(after! apheleia
+  (setq apheleia-formatters-respect-indent-level nil)
+  (set-formatter! 'ruff '("ruff" "format" "--stdin-filename" filepath "-") :modes '(python-mode))
+  (setq apheleia-mode-alist (cons '(python-mode . ruff)
+                                  (assoc-delete-all 'python-mode apheleia-mode-alist))))
