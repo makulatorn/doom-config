@@ -7,11 +7,15 @@
 (setq display-line-numbers-type t)
 (setq org-directory "~/org/")
 
-;; Path and Environment Logic
-(add-to-list 'exec-path "/home/trasha/.cargo/bin")
-(setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH")))
-(when (memq window-system '(x pgtk))
-  (exec-path-from-shell-initialize))
+;; Consolidated Path and Environment Logic
+(use-package! exec-path-from-shell
+  :config
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "NIX_PROFILES" "NIX_SSL_CERT_FILE"))
+  (when (memq window-system '(x pgtk))
+    (exec-path-from-shell-initialize))
+  ;; Add cargo after the shell sync to ensure it persists
+  (add-to-list 'exec-path "/home/trasha/.cargo/bin")
+  (setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH"))))
 
 ;; Packages & Modes
 (use-package! rainbow-delimiters
@@ -25,7 +29,11 @@
                                       (expand-file-name "lib" profile))))))
 
 (global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+(after! aggressive-indent
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'web-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'nunjucks-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'django-mode))
 
 (use-package! completion-preview
   :hook (prog-mode . completion-preview-mode)
@@ -84,6 +92,8 @@
 
 ;; LSP & Python
 (after! lsp-mode
+  (setq lsp-enable-file-watchers nil)
+  (setq lsp-file-watch-threshold 500)
   (setq lsp-pyright-langserver-command "basedpyright"
         lsp-pyright-type-checking-mode "basic"
         lsp-pyright-auto-import-completions t
@@ -107,6 +117,13 @@
 (setq +format-on-save-enabled-modes '(python-mode))
 
 (after! apheleia
+  (set-formatter! 'prettierd '("prettierd" "--stdin-filepath" filepath))
+  (setq apheleia-mode-alist
+        (append '((html-mode . prettierd)
+                  (web-mode . prettierd)
+                  (css-mode . prettierd)
+                  (scss-mode . prettierd))
+                apheleia-mode-alist))
   (setq apheleia-formatters-respect-indent-level nil)
   (set-formatter! 'ruff '("ruff" "format" "--stdin-filename" filepath "-") :modes '(python-mode))
   (setq apheleia-mode-alist (cons '(python-mode . ruff)
