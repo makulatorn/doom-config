@@ -8,6 +8,7 @@
 (setq org-directory "~/org/")
 
 ;; Consolidated Path and Environment Logic
+(setq-default load-path (append package-activated-list load-path))
 (use-package! exec-path-from-shell
   :config
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "NIX_PROFILES" "NIX_SSL_CERT_FILE"))
@@ -128,3 +129,22 @@
   (set-formatter! 'ruff '("ruff" "format" "--stdin-filename" filepath "-") :modes '(python-mode))
   (setq apheleia-mode-alist (cons '(python-mode . ruff)
                                   (assoc-delete-all 'python-mode apheleia-mode-alist))))
+
+(after! vertico
+  (setq vertico-cycle t)
+  (setq vertico-resize t))
+
+(after! consult
+  (setq consult-preview-key 'any)
+  (setq consult-project-function (lambda (_) (projectile-project-root))))
+
+(map! :n "C-;" #'embark-act)
+
+(after! transient
+  (setq transient-display-buffer-action
+        '(display-buffer-in-side-window
+          (side . bottom)
+          (dedicated . t)
+          (window-height . 0.4)))
+  (setq transient-show-popup t)
+  (setq transient-show-common-commands t))

@@ -67,3 +67,11 @@
 (package! eldoc-box)
 
 (package! exec-path-from-shell)
+
+(package! embark)
+
+(package! embark-consult)
+
+(package! screenshot :recipe (:host github :repo "tecosaur/screenshot"))
+
+(package! transient :recipe (:host github :repo "magit/transient"))
