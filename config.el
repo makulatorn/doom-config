@@ -148,3 +148,13 @@
           (window-height . 0.4)))
   (setq transient-show-popup t)
   (setq transient-show-common-commands t))
+
+(after! screenshot
+  (advice-add 'read-file-name :around
+              (lambda (orig-fun prompt &optional dir default-filename mustmatch initial predicate)
+                (let ((new-dir (if (string-prefix-p "Save as: " prompt)
+                                   "/home/trasha/images/"
+                                 dir)))
+                  (funcall orig-fun prompt new-dir default-filename mustmatch initial predicate)))))
+(map! :leader
+      :desc "Take a screenshot" "S" #'screenshot)
