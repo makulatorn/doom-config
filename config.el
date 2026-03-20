@@ -3,7 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(setq doom-theme 'doom-homage-black)
+(setq doom-theme 'doom-ir-black)
 (setq display-line-numbers-type t)
 (setq org-directory "~/org/")
 
@@ -34,18 +34,26 @@
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'web-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'nunjucks-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'django-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'django-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'python-mode))
 
 (use-package! completion-preview
   :hook (prog-mode . completion-preview-mode)
   :config
   (setq completion-preview-minimum-symbol-length 1
-        completion-preview-idle-delay 0.05))
+        completion-preview-idle-delay 0.0))
 
 (after! company
-  (setq company-idle-delay 0.5))
+  (setq company-idle-delay 0.0
+        company-minimum-prefix-length 1))
 (add-hook 'text-mode-hook #'completion-preview-mode)
 (add-hook 'conf-mode-hook #'completion-preview-mode)
+
+;; Eshell
+(after! eshell
+  (set-eshell-alias!
+   "pre-commit"
+   "docker exec ${docker ps -qf \"ancestor=easyrf\"} pre-commit run --all-files"))
 
 ;; Keybindings & Workspaces
 (map! :g "M-1" #'centaur-tabs-backward
@@ -53,6 +61,11 @@
 (map! :nv "M-<left>" #'+workspace/switch-left
       :nv "M-<right>" #'+workspace/switch-right)
 (setq +workspace-cycle-wrap t)
+(map! :leader
+      :desc "Take a screenshot" "S" #'screenshot)
+(map! :n "C-;" #'embark-act)
+(map! :leader
+      :desc "Aphelia buffer on/off" "A" #'apheleia-mode)
 
 ;; Indentation Defaults
 (setq-default tab-width 2
@@ -69,7 +82,7 @@
   :init
   (global-blamer-mode 1)
   :custom
-  (blamer-idle-time 0.3)
+  (blamer-idle-time 0.0)
   (blamer-min-offset 70)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
@@ -93,6 +106,9 @@
 
 ;; LSP & Python
 (after! lsp-mode
+  (setq lsp-idle-delay 0.1
+        lsp-ui-doc-delay 0.1
+        lsp-signature-doc-lines 1)
   (setq lsp-enable-file-watchers nil)
   (setq lsp-file-watch-threshold 500)
   (setq lsp-pyright-langserver-command "basedpyright"
@@ -138,8 +154,6 @@
   (setq consult-preview-key 'any)
   (setq consult-project-function (lambda (_) (projectile-project-root))))
 
-(map! :n "C-;" #'embark-act)
-
 (after! transient
   (setq transient-display-buffer-action
         '(display-buffer-in-side-window
@@ -156,5 +170,3 @@
                                    "/home/trasha/images/"
                                  dir)))
                   (funcall orig-fun prompt new-dir default-filename mustmatch initial predicate)))))
-(map! :leader
-      :desc "Take a screenshot" "S" #'screenshot)
