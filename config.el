@@ -97,12 +97,14 @@
 (use-package! eldoc-box
   :hook (lsp-mode . eldoc-box-hover-at-point-mode)
   :config
-  (setq eldoc-box-max-pixel-width 600
+  (setq eldoc-box-hover-display-frame-above-point t
+        eldoc-box-max-pixel-width 600
         eldoc-box-max-pixel-height 400
-        eldoc-box-offset '(30 . 20)
+        eldoc-box-offset '(20 20 20)
         eldoc-box-frame-parameters
         '((alpha . 85)
-          (undecorated . t))))
+          (undecorated . t)
+          (no-accept-focus . t))))
 
 ;; LSP & Python
 (after! lsp-mode
