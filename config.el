@@ -82,12 +82,11 @@
   :init
   (global-blamer-mode 1)
   :custom
-  (blamer-idle-time 0.0)
-  (blamer-min-offset 70)
+  (blamer-idle-time 0.5)
+  (blamer-min-offset 40)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
-                   :height 100
-                   :italic t)))
+                   :height 0.9)))
   :config
   (setq blamer-prettify-time-p nil
         blamer-datetime-formatter "[%s]"
