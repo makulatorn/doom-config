@@ -172,3 +172,5 @@
                                    "/home/trasha/images/"
                                  dir)))
                   (funcall orig-fun prompt new-dir default-filename mustmatch initial predicate)))))
+
+(setq-default flycheck-stylelintrc "/home/trasha/.stylelintrc")
