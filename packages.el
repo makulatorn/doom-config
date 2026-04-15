@@ -75,3 +75,6 @@
 (package! screenshot :recipe (:host github :repo "tecosaur/screenshot"))
 
 (package! transient :recipe (:host github :repo "magit/transient"))
+
+(package! tamagotchi-on-emacs
+  :recipe (:host github :repo "tiatatida/tamagotchi-on-emacs"))

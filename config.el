@@ -173,3 +173,9 @@
                   (funcall orig-fun prompt new-dir default-filename mustmatch initial predicate)))))
 
 (setq-default flycheck-stylelintrc "/home/trasha/.stylelintrc")
+
+(use-package! tamagotchi
+  :defer t
+  :commands (tamagotchi tamacare tamastatus)
+  :init
+  (setq tamagotchi-save-file "~/.config/doom/.tamagotchi"))
