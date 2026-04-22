@@ -49,12 +49,6 @@
 (add-hook 'text-mode-hook #'completion-preview-mode)
 (add-hook 'conf-mode-hook #'completion-preview-mode)
 
-;; Eshell
-(after! eshell
-  (set-eshell-alias!
-   "pre-commit"
-   "docker exec ${docker ps -qf \"ancestor=easyrf\"} pre-commit run --all-files"))
-
 ;; Keybindings & Workspaces
 (map! :g "M-1" #'centaur-tabs-backward
       :g "M-2" #'centaur-tabs-forward)
