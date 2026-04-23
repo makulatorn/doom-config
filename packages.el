@@ -78,3 +78,5 @@
 
 (package! tamagotchi-on-emacs
   :recipe (:host github :repo "tiatatida/tamagotchi-on-emacs"))
+
+(package! simple-httpd)

@@ -60,7 +60,8 @@
 (map! :n "C-;" #'embark-act)
 (map! :leader
       :desc "Aphelia buffer on/off" "A" #'apheleia-mode)
-
+(map! :leader
+      :desc "Live preview" "o v" #'httpd-serve-directory)
 ;; Indentation Defaults
 (setq-default tab-width 2
               evil-shift-width 2)
