@@ -155,7 +155,7 @@
           (side . bottom)
           (dedicated . t)
           (window-height . 0.4)))
-  (setq transient-show-popup t)
+  (setq transient-show-menu t)
   (setq transient-show-common-commands t))
 
 (after! screenshot
