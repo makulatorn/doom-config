@@ -8,13 +8,14 @@
 (setq org-directory "~/org/")
 
 ;; Consolidated Path and Environment Logic
-(setq-default load-path (append package-activated-list load-path))
 (use-package! exec-path-from-shell
   :config
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "NIX_PROFILES" "NIX_SSL_CERT_FILE"))
   (when (memq window-system '(x pgtk))
     (exec-path-from-shell-initialize))
   ;; Add cargo after the shell sync to ensure it persists
+  (add-to-list 'exec-path "/home/trasha/.npm/bin")
+  (setenv "PATH" (concat "/home/trasha/.npm/bin:" (getenv "PATH")))
   (add-to-list 'exec-path "/home/trasha/.cargo/bin")
   (setenv "PATH" (concat "/home/trasha/.cargo/bin:" (getenv "PATH"))))
 
@@ -35,7 +36,8 @@
   (add-to-list 'aggressive-indent-excluded-modes 'web-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'nunjucks-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'django-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'python-mode))
+  (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'css-mode))
 
 (use-package! completion-preview
   :hook (prog-mode . completion-preview-mode)
@@ -101,6 +103,7 @@
 
 ;; LSP & Python
 (after! lsp-mode
+  (setq lsp-css-server-command '("/home/trasha/.npm/bin/vscode-css-language-server" "--stdio"))
   (setq lsp-idle-delay 0.1
         lsp-ui-doc-delay 0.1
         lsp-signature-doc-lines 1)
