@@ -29,15 +29,8 @@
                 (cl-loop for profile in profiles
                          append (list (expand-file-name "lib/tree-sitter" profile)
                                       (expand-file-name "lib" profile))))))
-
-(global-aggressive-indent-mode 1)
-(after! aggressive-indent
-  (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'web-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'nunjucks-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'django-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'css-mode))
+(use-package aggressive-indent
+  :hook (emacs-lisp-mode . aggressive-indent-mode))
 
 (use-package! completion-preview
   :hook (prog-mode . completion-preview-mode)
@@ -64,6 +57,11 @@
       :desc "Aphelia buffer on/off" "A" #'apheleia-mode)
 (map! :leader
       :desc "Live preview" "o v" #'httpd-serve-directory)
+
+(meow-normal-define-key
+ '("<" . mc/mark-previous-like-this)
+ '(">" . mc/mark-next-like-this))
+
 ;; Indentation Defaults
 (setq-default tab-width 2
               evil-shift-width 2)
