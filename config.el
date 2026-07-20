@@ -89,66 +89,45 @@
 
 ;; Eldoc Box (The working version)
 (use-package! eldoc-box
-  :hook (lsp-mode . eldoc-box-hover-at-point-mode)
+  :ghook ('(eglot-managed-mode-hook lsp-mode-hook) #'eldoc-box-hover-at-point-mode)
   :config
+  (custom-set-faces!
+    '(eldoc-box-body :inherit tooltip)
+    '(eldoc-box-border :inherit tooltip))
+
   (setq eldoc-box-max-pixel-width 600
         eldoc-box-max-pixel-height 400
         eldoc-box-offset '(20 20 20)
         eldoc-box-frame-parameters
-        '((alpha . 85)
+        '((alpha . 95)
           (undecorated . t)
-          (no-accept-focus . t))))
+          (no-accept-focus . t)
+          (internal-border-width . 10))))
 
-;; LSP & Python
-(after! lsp-mode
-  (setq lsp-css-server-command '("/home/trasha/.npm/bin/vscode-css-language-server" "--stdio"))
-  (setq lsp-idle-delay 0.1
-        lsp-ui-doc-delay 0.1
-        lsp-signature-doc-lines 1)
-  (setq lsp-enable-file-watchers nil)
-  (setq lsp-file-watch-threshold 500)
-  (setq lsp-pyright-langserver-command "basedpyright"
-        lsp-pyright-type-checking-mode "basic"
-        lsp-pyright-auto-import-completions t
-        lsp-headerline-breadcrumb-enable nil
-        lsp-ui-doc-enable nil
-        lsp-eldoc-render-all t
-        lsp-signature-auto-activate t
-        lsp-signature-render-documentation t)
+(use-package! apheleia
+  :config
+  (apheleia-global-mode +1)
 
-  (let ((nix-python-path (expand-file-name
-                          (concat "~/.nix-profile/lib/python"
-                                  (string-trim (shell-command-to-string "python3 -c 'import sys; print(f\"{sys.version_info.major}.{sys.version_info.minor}\")'"))
-                                  "/site-packages"))))
-    (setq lsp-pyright-extra-paths (vector nix-python-path))))
+  (set-formatter! 'ruff '("ruff" "format" "--stdin-filename" filepath "-")
+    :modes '(python-mode python-ts-mode))
 
-(after! python
-  (setq-hook! 'python-mode-hook +format-with-ruff-ts-mode t)
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (setq-local lsp-enabled-clients '(pyright ruff)))))
-(setq +format-on-save-enabled-modes '(python-mode))
-
-(after! apheleia
   (set-formatter! 'prettierd '("prettierd" "--stdin-filepath" filepath))
   (setq apheleia-mode-alist
         (append '((html-mode . prettierd)
                   (web-mode . prettierd)
                   (css-mode . prettierd)
-                  (scss-mode . prettierd))
-                apheleia-mode-alist))
-  (setq apheleia-formatters-respect-indent-level nil)
-  (set-formatter! 'ruff '("ruff" "format" "--stdin-filename" filepath "-") :modes '(python-mode))
-  (setq apheleia-mode-alist (cons '(python-mode . ruff)
-                                  (assoc-delete-all 'python-mode apheleia-mode-alist))))
+                  (scss-mode . prettierd)
+                  (python-mode . ruff)
+                  (python-ts-mode . ruff))
+                apheleia-mode-alist)))
 
-(after! vertico
-  (setq vertico-cycle t)
-  (setq vertico-resize t))
+(after! eglot
+  (add-to-list 'eglot-ignored-server-capabilities :documentFormattingProvider))
 
-(after! consult
-  (setq consult-preview-key 'any)
-  (setq consult-project-function (lambda (_) (projectile-project-root))))
+(after! python
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local lsp-enabled-clients '(pyright ruff)))))
 
 (after! transient
   (setq transient-display-buffer-action
@@ -174,3 +153,30 @@
   :commands (tamagotchi tamacare tamastatus)
   :init
   (setq tamagotchi-save-file "~/.config/doom/.tamagotchi"))
+
+(defun my/code-action ()
+  "Run code action"
+  (interactive)
+  (cond ((bound-and-true-p eglot--managed-mode)
+         (call-interactively #'eglot-code-actions))
+        ((bound-and-true-p lsp-mode)
+         (call-interactively #'lsp-execute-code-action))
+        (t (user-error "No active LSP client"))))
+
+(after! meow
+  (meow-normal-define-key
+   '("k" . my/code-action)))
+
+(use-package! flx)
+
+(after! helm
+  (custom-set-faces!
+    ;; The active/selected line in Helm
+    `(helm-selection :background "#262626" :foreground "#ffffff" :weight bold)
+    ;; The general Helm buffer background and normal text
+    `(helm-source-header :background "#1c1c1c" :foreground "#FFD700" :weight bold)
+    ;; Fuzzy matching / search highlights
+    `(helm-match :foreground "#FF5F87" :weight bold)
+    `(helm-moccur-buffer :foreground "#8787FF")
+    ;; Header line at the top of Helm
+    `(helm-header :background "#121212" :foreground "#767676")))

@@ -23,10 +23,10 @@
        :completion
        (company +childframe)            ; the ultimate code completion backend
        ;;(corfu +orderless) ; complete with cap(f), cape and a flying feather!
-       ;;(helm +childframe +fuzzy +icons)              ; the *other* search engine for love and life
+       (helm +childframe +fuzzy +icons)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +childframe +fuzzy +icon) ; a search engine for love and life
-       (vertico +icons)                 ; the search engine of the future
+       ;; (vertico +icons) ; the search engine of the future
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -105,7 +105,7 @@
        (eval +overlay)             ; run code, run (also, repls)
        (lookup +dictionary +docsets +offline) ; navigate your code and its documentation
        ;;llm               ; when I said you needed friends, I didn't mean...
-       (lsp +peek)       ; M-x vscode
+       (lsp +eglot)       ; M-x vscode
        (magit +forge)    ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        ;; pass              ; password manager for nerds
@@ -129,7 +129,7 @@
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
-       data                     ; config/data formats
+       (data +lsp) ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;dhall
        ;;elixir            ; erlang done right
