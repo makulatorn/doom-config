@@ -9,7 +9,10 @@
 
 (load! "+pkgs")
 (load! "+map")
-(load! "+after")
+(load! "+completion")
+(load! "+lang")
+(load! "+misc")
+(load! "+funky")
 
 ;; Consolidated Path and Environment Logic
 (use-package! exec-path-from-shell
@@ -33,14 +36,5 @@
       web-mode-markup-indent-offset 2)
 
 (setq-default flycheck-stylelintrc "/home/trasha/.stylelintrc")
-
-(defun my/code-action ()
-  "Run code action"
-  (interactive)
-  (cond ((bound-and-true-p eglot--managed-mode)
-         (call-interactively #'eglot-code-actions))
-        ((bound-and-true-p lsp-mode)
-         (call-interactively #'lsp-execute-code-action))
-        (t (user-error "No active LSP client"))))
 
 (add-hook! 'prog-mode-hook #'+word-wrap-mode)

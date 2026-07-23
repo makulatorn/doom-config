@@ -14,3 +14,7 @@
 (meow-normal-define-key
  '("<" . mc/mark-previous-like-this)
  '(">" . mc/mark-next-like-this))
+
+(after! meow
+  (meow-normal-define-key
+   '("k" . my/code-action)))
