@@ -80,3 +80,5 @@
   :recipe (:host github :repo "tiatatida/tamagotchi-on-emacs"))
 
 (package! simple-httpd)
+
+(package! helm-xref)

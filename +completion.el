@@ -18,3 +18,7 @@
     `(helm-moccur-buffer :foreground "#8787FF")
     ;; Header line at the top of Helm
     `(helm-header :background "#121212" :foreground "#767676")))
+
+(after! (helm xref)
+  (setq xref-show-xrefs-function #'helm-xref-show-xrefs
+        xref-show-definitions-function #'helm-xref-show-defs-with-pager))
