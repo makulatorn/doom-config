@@ -18,17 +18,14 @@
         completion-preview-idle-delay 0.0))
 
 (use-package! eldoc-box
-  :ghook ('(eglot-managed-mode-hook lsp-mode-hook) #'eldoc-box-hover-at-point-mode)
+  :ghook ('(eglot-managed-mode-hook lsp-mode-hook) #'eldoc-box-hover-mode)
   :config
+  (add-hook 'eldoc-box-buffer-setup-hook #'eldoc-box-prettify-ts-errors 0 t)
   (custom-set-faces!
     '(eldoc-box-body :inherit tooltip)
     '(eldoc-box-border :inherit tooltip))
-
-  (setq eldoc-box-max-pixel-width 600
-        eldoc-box-max-pixel-height 400
-        eldoc-box-offset '(20 20 20)
-        eldoc-box-frame-parameters
-        '((alpha . 95)
+  (setq eldoc-box-frame-parameters
+        '((alpha-background . 80)
           (undecorated . t)
           (no-accept-focus . t)
           (internal-border-width . 10))))
