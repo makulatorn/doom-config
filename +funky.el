@@ -7,3 +7,17 @@
         ((bound-and-true-p lsp-mode)
          (call-interactively #'lsp-execute-code-action))
         (t (user-error "No active LSP client"))))
+
+(defun my/meow-wrap-region (open close)
+  "Wrap active region or character at point with OPEN and CLOSE."
+  (interactive)
+  (if (use-region-p)
+      (let ((beg (region-beginning))
+            (end (region-end)))
+        (save-excursion
+          (goto-char end)
+          (insert close)
+          (goto-char beg)
+          (insert open)))
+    (insert open close)
+    (backward-char (length close))))

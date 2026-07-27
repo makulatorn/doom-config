@@ -11,10 +11,16 @@
 (map! :leader
       :desc "Live preview" "o v" #'httpd-serve-directory)
 
-(meow-normal-define-key
- '("<" . mc/mark-previous-like-this)
- '(">" . mc/mark-next-like-this))
-
 (after! meow
   (meow-normal-define-key
-   '("k" . my/code-action)))
+   '("k" . my/code-action)
+   '("<" . mc/mark-previous-symbol-like-this)
+   '(">" . mc/mark-next-like-this)
+   '("\"" . (lambda () (interactive) (my/meow-wrap-region "\"" "\"")))
+   '("'"  . (lambda () (interactive) (my/meow-wrap-region "'" "'")))
+   '("("  . (lambda () (interactive) (my/meow-wrap-region "(" ")")))
+   '(")"  . (lambda () (interactive) (my/meow-wrap-region "(" ")")))
+   '("["  . (lambda () (interactive) (my/meow-wrap-region "[" "]")))
+   '("]"  . (lambda () (interactive) (my/meow-wrap-region "[" "]")))
+   '("{"  . (lambda () (interactive) (my/meow-wrap-region "{" "}")))
+   '("}"  . (lambda () (interactive) (my/meow-wrap-region "{" "}")))))
