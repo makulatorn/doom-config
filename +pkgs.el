@@ -39,10 +39,14 @@
 
   (set-formatter! 'prettierd '("prettierd" "--stdin-filepath" filepath))
   (setq apheleia-mode-alist
-        (append '((html-mode . prettierd)
-                  (web-mode . prettierd)
-                  (css-mode . prettierd)
-                  (scss-mode . prettierd)
+        (append '((html-mode   . prettierd)
+                  (web-mode    . prettierd)
+                  (css-mode    . prettierd)
+                  (scss-mode   . prettierd)
+                  (js-mode     . prettierd)
+                  (js-ts-mode  . prettierd)
+                  (js2-mode    . prettierd)
+                  (rjsx-mode   . prettierd)
                   (python-mode . ruff)
                   (python-ts-mode . ruff))
                 apheleia-mode-alist)))
