@@ -122,27 +122,21 @@ Can be an integer to determine the exact padding."
    ;;;; elscreen
    (elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
 
-   ;;;; evil
-   (evil-goggles-default-face :inherit 'region :background (doom-blend region bg 0.5))
-
-   ;;;; ivy
-   (ivy-current-match :background dark-blue :distant-foreground base0 :weight 'normal)
-
    ;;;; markdown-mode
    (markdown-markup-face :foreground base5)
    (markdown-header-face :inherit 'bold :foreground red)
    (markdown-code-face :background (doom-lighten base3 0.05))
 
-   ;;;; eldoc-box (personal addition — fixes beige childframe)
+   ;;;; eldoc-box
    (eldoc-box-body :background bg-alt :foreground fg)
-   (eldoc-box-border :background blue)
+   (eldoc-box-border :background bg-alt)
 
-   ;;;; centaur-tabs (personal addition — fixes beige tab bar)
+   ;;;; centaur-tabs
    (centaur-tabs-default :background bg :foreground bg)
    (centaur-tabs-selected :background bg-alt :foreground fg)
-   (centaur-tabs-selected-modified :background bg-alt :foreground fg)
+   (centaur-tabs-selected-modified :background bg-alt :foreground blue)
    (centaur-tabs-unselected :background bg :foreground base5)
-   (centaur-tabs-unselected-modified :background bg :foreground base5)
+   (centaur-tabs-unselected-modified :background bg :foreground blue)
    (centaur-tabs-active-bar-face :background blue))
 
   ;;;; Base theme variable overrides
