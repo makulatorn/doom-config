@@ -59,7 +59,7 @@
   (blamer-idle-time 0.5)
   (blamer-min-offset 40)
   :custom-face
-  (blamer-face ((t :foreground "#7a88cf"
+  (blamer-face ((t :foreground "#f5a9b8"
                    :height 0.9)))
   :config
   (setq blamer-prettify-time-p nil
