@@ -73,3 +73,8 @@
   (setq tamagotchi-save-file "~/.config/doom/.tamagotchi"))
 
 (use-package! flx)
+
+(use-package! rainbow-mode
+  :hook ((prog-mode text-mode) . rainbow-mode)
+  :config
+  (add-hook 'magit-mode-hook (lambda () (rainbow-mode -1))))
