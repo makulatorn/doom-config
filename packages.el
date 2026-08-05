@@ -56,10 +56,6 @@
 
 (package! aggressive-indent)
 
-(package! eglot-booster
-  :recipe (:host github
-           :repo "jdtsmith/eglot-booster"))
-
 (package! blamer)
 
 (package! posframe)
@@ -76,9 +72,8 @@
 
 (package! transient :recipe (:host github :repo "magit/transient"))
 
-(package! tamagotchi-on-emacs
-  :recipe (:host github :repo "tiatatida/tamagotchi-on-emacs"))
-
 (package! simple-httpd)
 
 (package! helm-xref)
+
+(package! colorful-mode)

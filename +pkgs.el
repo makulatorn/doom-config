@@ -66,15 +66,26 @@
         blamer-datetime-formatter "[%s]"
         blamer-entire-formatter " %s"))
 
-(use-package! tamagotchi
-  :defer t
-  :commands (tamagotchi tamacare tamastatus)
-  :init
-  (setq tamagotchi-save-file "~/.config/doom/.tamagotchi"))
-
 (use-package! flx)
 
-(use-package! rainbow-mode
-  :hook ((prog-mode text-mode) . rainbow-mode)
+(setq css-fontify-colors nil)
+
+(remove-hook! '(prog-mode-hook
+                text-mode-hook
+                css-mode-hook
+                web-mode-hook
+                emacs-lisp-mode-hook)
+  #'rainbow-mode
+  #'+rainbow-mode-h
+  #'+rainbow-init-h)
+
+(use-package colorful-mode
+  ;; :diminish
+  ;; :ensure t ; Optional
+  :custom
+  (colorful-use-prefix t)
+  (colorful-only-strings 'only-prog)
+  (css-fontify-colors nil)
   :config
-  (add-hook 'magit-mode-hook (lambda () (rainbow-mode -1))))
+  (global-colorful-mode t)
+  (add-to-list 'global-colorful-modes 'helpful-mode))

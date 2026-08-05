@@ -6,7 +6,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("f4d1b183465f2d29b7a2e9dbe87ccc20598e79738e5d29fc52ec8fb8c576fcfd" default))
- '(package-selected-packages '(transient typescript-mode))
+ '(package-selected-packages '(colorful-mode transient typescript-mode))
  '(screenshot-line-numbers-p t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
