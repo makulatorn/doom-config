@@ -13,6 +13,7 @@
 (load! "+lang")
 (load! "+misc")
 (load! "+funky")
+(load! "+docsets")
 
 ;; Consolidated Path and Environment Logic
 (use-package! exec-path-from-shell

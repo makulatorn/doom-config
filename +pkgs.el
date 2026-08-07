@@ -25,7 +25,7 @@
     '(eldoc-box-body :inherit tooltip)
     '(eldoc-box-border :inherit tooltip))
   (setq eldoc-box-frame-parameters
-        '((alpha-background . 80)
+        '((alpha-background . 75)
           (undecorated . t)
           (no-accept-focus . t)
           (internal-border-width . 10))))
@@ -83,9 +83,23 @@
   ;; :diminish
   ;; :ensure t ; Optional
   :custom
-  (colorful-use-prefix t)
+  (colorful-use-prefix nil)
   (colorful-only-strings 'only-prog)
   (css-fontify-colors nil)
+  (colorful-highlight-in-comments t)
   :config
+  (add-to-list 'colorful-extra-color-keyword-functions
+               '(prog-mode . (colorful-add-hex-colors
+                              colorful-add-rgb-colors
+                              colorful-add-hsl-colors
+                              colorful-add-oklab-oklch-colors
+                              colorful-add-css-variables-colors
+                              colorful-add-web-color-names
+                              colorful-add-emacs-color-names
+                              colorful-add-latex-colors
+                              colorful-add-ansi-shell-colors)))
   (global-colorful-mode t)
   (add-to-list 'global-colorful-modes 'helpful-mode))
+
+(use-package! scopeline
+  :hook (prog-mode . scopeline-mode))

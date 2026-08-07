@@ -76,7 +76,7 @@
        :emacs
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       eww               ; the internet is gross
+       ;; eww               ; the internet is gross
        ibuffer           ; interactive buffer management
        tramp             ; remote files at your arthritic fingertips
        undo              ; persistent, smarter undo for your inevitable mistakes
@@ -134,7 +134,7 @@
        ;;dhall
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
-       (emacs-lisp +lsp)                ; drown in parentheses
+       (emacs-lisp +lsp +tree-sitter)                ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;factor
@@ -161,7 +161,7 @@
        ;;lua               ; one-based indices? one-based indices
        markdown         ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       (nix +lsp)       ; I hereby declare "nix geht mehr!"
+       (nix +lsp +tree-sitter)       ; I hereby declare "nix geht mehr!"
        ;; (ocaml +lsp) ; an objective camel
        org       ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
@@ -172,7 +172,8 @@
         +lsp
         +poetry
         +pyright
-        +ruff)       ; beautiful is better than ugly
+        +ruff
+        +tree-sitter)       ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
@@ -187,7 +188,7 @@
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       (web +lsp +html +css)            ; the tubes
+       (web +lsp +html +css +tree-sitter)            ; the tubes
        yaml                             ; JSON, but readable
        ;;zig               ; C, but simpler
 

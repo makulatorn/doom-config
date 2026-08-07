@@ -68,12 +68,20 @@
 
 (package! embark-consult)
 
-(package! screenshot :recipe (:host github :repo "tecosaur/screenshot"))
+(package! screenshot
+  :recipe (:host github
+           :repo "tecosaur/screenshot"))
 
-(package! transient :recipe (:host github :repo "magit/transient"))
+(package! transient
+  :recipe (:host github
+           :repo "magit/transient"))
 
 (package! simple-httpd)
 
 (package! helm-xref)
 
 (package! colorful-mode)
+
+(package! scopeline
+  :recipe (:host github
+           :repo "meain/scopeline.el"))
