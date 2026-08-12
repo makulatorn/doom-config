@@ -1,11 +1,6 @@
 (map! :g "M-1" #'centaur-tabs-backward
       :g "M-2" #'centaur-tabs-forward)
 
-(map! :nv "M-<left>" #'+workspace/switch-left
-      :nv "M-<right>" #'+workspace/switch-right)
-
-(setq +workspace-cycle-wrap t)
-
 (map! :leader
       :desc "Take a screenshot" "S" #'screenshot)
 
