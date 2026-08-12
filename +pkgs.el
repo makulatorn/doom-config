@@ -14,8 +14,8 @@
 (use-package! completion-preview
   :hook (prog-mode . completion-preview-mode)
   :config
-  (setq completion-preview-minimum-symbol-length 1
-        completion-preview-idle-delay 0.0))
+  (setq completion-preview-minimum-symbol-length 3
+        completion-preview-idle-delay 0.6))
 
 (use-package! eldoc-box
   :ghook ('(eglot-managed-mode-hook lsp-mode-hook) #'eldoc-box-hover-mode)
@@ -24,6 +24,7 @@
   (custom-set-faces!
     '(eldoc-box-body :inherit tooltip)
     '(eldoc-box-border :inherit tooltip))
+  (setq eldoc-idle-delay 0.5)
   (setq eldoc-box-frame-parameters
         '((alpha-background . 75)
           (undecorated . t)

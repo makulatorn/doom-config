@@ -22,3 +22,6 @@
 (after! (helm xref)
   (setq xref-show-xrefs-function #'helm-xref-show-xrefs
         xref-show-definitions-function #'helm-xref-show-defs-with-pager))
+
+(setq company-idle-delay 0.3)
+(setq company-minimum-prefix-length 3)
