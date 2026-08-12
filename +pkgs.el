@@ -26,9 +26,9 @@
     '(eldoc-box-border :inherit tooltip))
   (setq eldoc-idle-delay 0.5)
   (setq eldoc-box-frame-parameters
-        '((alpha-background . 75)
-          (undecorated . t)
-          (no-accept-focus . t)
+        '((alpha-background      . 75)
+          (undecorated           . t)
+          (no-accept-focus       . t)
           (internal-border-width . 10))))
 
 (use-package! apheleia
@@ -40,15 +40,15 @@
 
   (set-formatter! 'prettierd '("prettierd" "--stdin-filepath" filepath))
   (setq apheleia-mode-alist
-        (append '((html-mode   . prettierd)
-                  (web-mode    . prettierd)
-                  (css-mode    . prettierd)
-                  (scss-mode   . prettierd)
-                  (js-mode     . prettierd)
-                  (js-ts-mode  . prettierd)
-                  (js2-mode    . prettierd)
-                  (rjsx-mode   . prettierd)
-                  (python-mode . ruff)
+        (append '((html-mode      . prettierd)
+                  (web-mode       . prettierd)
+                  (css-mode       . prettierd)
+                  (scss-mode      . prettierd)
+                  (js-mode        . prettierd)
+                  (js-ts-mode     . prettierd)
+                  (js2-mode       . prettierd)
+                  (rjsx-mode      . prettierd)
+                  (python-mode    . ruff)
                   (python-ts-mode . ruff))
                 apheleia-mode-alist)))
 

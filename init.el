@@ -101,8 +101,8 @@
        (direnv +flare +lsp)
        docker
        editorconfig                ; let someone else argue about tabs vs spaces
-       ein                         ; tame Jupyter notebooks with emacs
-       (eval +overlay)             ; run code, run (also, repls)
+       ;; ein                         ; tame Jupyter notebooks with emacs
+       (eval +overlay)           ; run code, run (also, repls)
        (lookup +dictionary +docsets +offline) ; navigate your code and its documentation
        ;;llm               ; when I said you needed friends, I didn't mean...
        (lsp +eglot)       ; M-x vscode
@@ -124,12 +124,12 @@
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        ;;(cc +lsp)         ; C > C++ == 1
-       (clojure +lsp)            ; java with a lisp
-       (common-lisp +lsp)        ; if you've seen one lisp, you've seen them all
+       (clojure +lsp +tree-sitter)            ; java with a lisp
+       (common-lisp +lsp +tree-sitter)        ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
-       (data +lsp) ; config/data formats
+       (data +lsp +tree-sitter) ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;dhall
        ;;elixir            ; erlang done right
@@ -145,21 +145,21 @@
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
        ;;(graphql +lsp)    ; Give queries a REST
-       (haskell +lsp)                   ; a language that's lazier than I am
+       ;;(haskell +lsp +tree-sitter)   ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       (json +lsp)                  ; At least it ain't XML
+       (json +lsp +tree-sitter)                  ; At least it ain't XML
        ;;janet             ; Fun fact: Janet is me!
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
        (javascript +lsp +tree-sitter) ; all(hope(abandon(ye(who(enter(here))))))
        (typescript +lsp +tree-sitter)
        ;;julia             ; a better, faster MATLAB
        ;;(kotlin +lsp) ; a better, slicker Java(Script)
-       (latex +lsp) ; writing papers in Emacs has never been so fun
+       ;; (latex +lsp) ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
-       markdown         ; writing docs for people to ignore
+       (markdown +lsp +tree-sitter)         ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        (nix +lsp +tree-sitter)       ; I hereby declare "nix geht mehr!"
        ;; (ocaml +lsp) ; an objective camel
@@ -182,14 +182,14 @@
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;; (rust +lsp) ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
-       (scheme +guile)      ; a fully conniving family of lisps
-       sh                   ; she sells {ba,z,fi}sh shells on the C xor
+       (scheme +guile +tree-sitter)      ; a fully conniving family of lisps
+       (sh +lsp +tree-sitter)                   ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp +html +css +tree-sitter)            ; the tubes
-       yaml                             ; JSON, but readable
+       (yaml +lsp +tree-sitter)                             ; JSON, but readable
        ;;zig               ; C, but simpler
 
        :email

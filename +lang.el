@@ -9,10 +9,10 @@
 
 ;; --- TREESITTER ---
 (setq treesit-language-source-alist
-      '((python . ("https://github.com/tree-sitter/tree-sitter-python"))
+      '((python     . ("https://github.com/tree-sitter/tree-sitter-python"))
         (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
-        (elisp . ("https://github.com/Wilfred/tree-sitter-elisp"))
-        (json . ("https://github.com/tree-sitter/tree-sitter-json"))
+        (elisp      . ("https://github.com/Wilfred/tree-sitter-elisp"))
+        (json       . ("https://github.com/tree-sitter/tree-sitter-json"))
         ))
 (setq treesit-extra-load-path
       '("/etc/profiles/per-user/trasha/lib"))
