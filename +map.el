@@ -22,9 +22,10 @@
 
 (after! meow
   (meow-normal-define-key
-   '("X" . meow-kill)
-   '("S" . +default/search-project)
-   '("s" . swiper-helm)
+   '("F"   . +helm/projectile-find-file)
+   '("X"   . meow-kill)
+   '("S"   . +default/search-project)
+   '("s"   . swiper-helm)
    '("Y"   . +lookup/references)
    '("y"   . +lookup/definition)
    '("p"   . +lookup/in-docsets)
