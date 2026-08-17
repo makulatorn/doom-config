@@ -15,3 +15,11 @@
           (window-height . 0.4)))
   (setq transient-show-menu t)
   (setq transient-show-common-commands t))
+
+(use-package! showkey
+  :commands (showkey-tooltip-mode showkey-log-mode)
+  :init
+  (map! :leader
+        (:prefix-map ("t" . "toggle")
+         :desc "Showkey tooltip" "k" #'showkey-tooltip-mode
+         :desc "Showkey log"     "K" #'showkey-log-mode)))

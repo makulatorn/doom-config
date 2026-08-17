@@ -85,3 +85,9 @@
 (package! scopeline
   :recipe (:host github
            :repo "meain/scopeline.el"))
+
+(package! showkey
+  :recipe (:host github
+           :repo "emacsmirror/showkey"))
+
+(package! devdocs)

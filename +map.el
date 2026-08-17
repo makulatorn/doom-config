@@ -23,7 +23,7 @@
    '("s"   . swiper-helm)
    '("Y"   . +lookup/references)
    '("y"   . +lookup/definition)
-   '("p"   . +lookup/in-docsets)
+   '("p"   . devdocs-lookup)
    '("P"   . +lookup/in-all-docsets)
    '("G"   . goto-line)
    '("C"   . meow-save)
