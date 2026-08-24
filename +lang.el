@@ -7,6 +7,10 @@
             (lambda ()
               (setq-local lsp-enabled-clients '(pyright ruff)))))
 
+(after! eglot
+  (setq-default eglot-workspace-configuration
+                '(:basedpyright (:typeCheckingMode "standard"))))
+
 ;; --- TREESITTER ---
 (setq treesit-language-source-alist
       '((python     . ("https://github.com/tree-sitter/tree-sitter-python"))

@@ -91,3 +91,5 @@
            :repo "emacsmirror/showkey"))
 
 (package! devdocs)
+
+(package! direnv)
