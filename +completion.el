@@ -22,3 +22,6 @@
 (after! (helm xref)
   (setq xref-show-xrefs-function #'helm-xref-show-xrefs
         xref-show-definitions-function #'helm-xref-show-defs-with-pager))
+
+(after! flycheck
+  (setq-default flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
