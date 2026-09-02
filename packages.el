@@ -93,3 +93,5 @@
 (package! devdocs)
 
 (package! direnv)
+
+(package! adaptive-wrap)
