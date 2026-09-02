@@ -78,6 +78,7 @@ Can be an integer to determine the exact padding."
    (doc-comments
     (doom-lighten
      (if transcoded-brighter-comments dark-cyan base5) 0.25))
+   (constants green-alt)
    (functions white)
    (keywords blue)
    (methods cyan)
@@ -129,7 +130,7 @@ Can be an integer to determine the exact padding."
    (markdown-markup-face             :foreground base5)
    (markdown-header-face             :inherit 'bold
                                      :foreground red)
-   (markdown-code-face               :background (doom-lighten base3 0 .05))
+   (markdown-code-face               :background (doom-lighten base3 0.05))
 
 ;;;; eldoc-box
    (eldoc-box-body                   :background bg-alt
