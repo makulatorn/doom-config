@@ -95,3 +95,10 @@
 (package! direnv)
 
 (package! adaptive-wrap)
+
+(package! poimap
+  :recipe (:host github
+           :repo "florommel/poimap"))
+(package! bm)
+(package! swiper)
+(package! diff-hl)
