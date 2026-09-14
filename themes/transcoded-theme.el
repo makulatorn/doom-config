@@ -47,8 +47,8 @@ Can be an integer to determine the exact padding."
    (base3      '("#23272e" "#262626" "brightblack"))
    (base4      '("#3f444a" "#3f3f3f" "brightblack"))
    (base5      '("#5B6268" "#525252" "brightblack"))
-   (base6      '("#73797e" "#6b6b6b" "brightblack"))
-   (base7      '("#9ca0a4" "#979797" "brightblack"))
+   (base6      '("#7d838a" "#6b6b6b" "brightblack"))
+   (base7      '("#979797" "#979797" "brightblack"))
    (base8      '("#DFDFDF" "#dfdfdf" "white"))
    (white      '("#ffffff" "#ffffff" "white"))
 
@@ -72,20 +72,20 @@ Can be an integer to determine the exact padding."
    (highlight blue)
    (vertical-bar base5)
    (selection cyan)
-   (builtin magenta)
+   (builtin base8)
    (comments
-    (if transcoded-brighter-comments dark-cyan base5))
+    (if transcoded-brighter-comments base6 base6))
    (doc-comments
     (doom-lighten
-     (if transcoded-brighter-comments dark-cyan base5) 0.25))
-   (constants green-alt)
-   (functions white)
-   (keywords blue)
-   (methods cyan)
-   (operators orange-alt)
-   (type orange)
-   (strings violet)
-   (variables magenta)
+     (if transcoded-brighter-comments base6 base6) 0.25))
+   (constants base8)
+   (functions fg)
+   (keywords white)
+   (methods base7)
+   (operators white)
+   (type fg)
+   (strings base8)
+   (variables fg)
    (numbers red-alt)
    (region `(,(doom-lighten (car bg-alt) 0.15) ,@(doom-lighten (cdr base0) 0.35)))
    (error red)
@@ -108,19 +108,18 @@ Can be an integer to determine the exact padding."
 ;;;; Base theme face overrides
   (((font-lock-comment-face &override)
     :background (if transcoded-brighter-comments (doom-lighten bg 0.05) 'unspecified))
+   ((font-lock-keyword-face &override) :weight 'bold)
+   ((font-lock-function-name-face &override) :weight 'bold)
+   ((font-lock-builtin-face &override) :weight 'bold)
+   ((font-lock-constant-face &override) :weight 'bold :slant 'italic)
+   ((font-lock-type-face &override) :slant 'italic)
+   ((font-lock-variable-name-face &override) :slant 'italic)
    ((line-number &override) :foreground base5)
-   ((line-number-current-line &override) :foreground "#FFFF00" :weight 'bold)
-   (mode-line
-    :background modeline-bg :foreground modeline-fg
-    :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
-   (mode-line-inactive
-    :background modeline-bg-inactive :foreground modeline-fg-alt
-    :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
 
 ;;;; css-mode <built-in> / scss-mode
-   (css-proprietary-property         :foreground orange)
-   (css-property                     :foreground green)
-   (css-selector                     :foreground blue)
+   (css-proprietary-property         :foreground white)
+   (css-property                     :foreground base6)
+   (css-selector                     :foreground white)
 
 ;;;; elscreen
    (elscreen-tab-other-screen-face   :background "#353a42"
@@ -137,7 +136,7 @@ Can be an integer to determine the exact padding."
                                      :foreground fg)
    (eldoc-box-border                 :background bg-alt)
 
-   ;;;; centaur-tabs
+;;;; centaur-tabs
    (centaur-tabs-default             :background bg
                                      :foreground bg)
    (centaur-tabs-selected            :background bg-alt
@@ -150,8 +149,8 @@ Can be an integer to determine the exact padding."
                                      :foreground blue)
    (centaur-tabs-active-bar-face     :background blue)
 
-   ;;;; gnus (explicit overrides — doom-themes' base fallback
-   ;;;; creates a mutual inheritance cycle between these two if left unset)
+;;;; gnus (explicit overrides — doom-themes' base fallback
+;;;; creates a mutual inheritance cycle between these two if left unset)
    (gnus-group-mail-1                :foreground magenta :weight 'bold)
    (gnus-group-mail-1-empty          :foreground base5)
    (gnus-group-news-low              :foreground base6)

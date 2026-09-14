@@ -102,3 +102,5 @@
 (package! bm)
 (package! swiper)
 (package! diff-hl)
+
+(package! almost-mono-themes)

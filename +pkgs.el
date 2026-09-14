@@ -54,14 +54,14 @@
 
 (use-package! blamer
   :bind (("s-i" . blamer-show-commit-info))
-  :init
-  (global-blamer-mode 1)
+  :defer 20
   :custom
   (blamer-idle-time 0.5)
   (blamer-min-offset 40)
   :custom-face
-  (blamer-face ((t :foreground "#f5a9b8"
-                   :height 0.9)))
+  (blamer-face ((t :foreground "#ffffff"
+                   :height 0.9
+                   :italic t)))
   :config
   (setq blamer-prettify-time-p nil
         blamer-datetime-formatter "[%s]"
