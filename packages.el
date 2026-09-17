@@ -60,8 +60,6 @@
 
 (package! posframe)
 
-(package! eldoc-box)
-
 (package! exec-path-from-shell)
 
 (package! embark)

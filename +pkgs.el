@@ -17,19 +17,27 @@
   (setq completion-preview-minimum-symbol-length 3
         completion-preview-idle-delay 0.6))
 
-(use-package! eldoc-box
-  :ghook ('(eglot-managed-mode-hook lsp-mode-hook) #'eldoc-box-hover-mode)
-  :config
-  (add-hook 'eldoc-box-buffer-setup-hook #'eldoc-box-prettify-ts-errors 0 t)
-  (custom-set-faces!
-    '(eldoc-box-body :inherit tooltip)
-    '(eldoc-box-border :inherit tooltip))
-  (setq eldoc-idle-delay 0.5)
-  (setq eldoc-box-frame-parameters
-        '((alpha-background      . 75)
-          (undecorated           . t)
-          (no-accept-focus       . t)
-          (internal-border-width . 10))))
+(after! eglot
+  (advice-add 'eglot--format-markup :filter-return
+              (lambda (result)
+                (if (stringp result)
+                    (with-temp-buffer
+                      (insert result)
+                      (goto-char (point-min))
+                      (while (re-search-forward "&lt;\\|&gt;\\|&amp;" nil t)
+                        (replace-match (pcase (match-string 0)
+                                         ("&lt;" "<")
+                                         ("&gt;" ">")
+                                         ("&amp;" "&"))))
+                      (goto-char (point-min))
+                      (while (re-search-forward "\\\\\\([][(){}.*+?|^$\\-]\\)" nil t)
+                        (replace-match "\\1"))
+                      (buffer-string))
+                  result))))
+
+(setq-local eldoc-echo-area-use-multiline-p t)
+(setq max-mini-window-height 0.3)
+(setq eldoc-echo-area-prefer-doc-buffer nil)
 
 (use-package! apheleia
   :config

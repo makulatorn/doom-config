@@ -131,10 +131,6 @@ Can be an integer to determine the exact padding."
                                      :foreground red)
    (markdown-code-face               :background (doom-lighten base3 0.05))
 
-;;;; eldoc-box
-   (eldoc-box-body                   :background bg-alt
-                                     :foreground fg)
-   (eldoc-box-border                 :background bg-alt)
 
 ;;;; centaur-tabs
    (centaur-tabs-default             :background bg
