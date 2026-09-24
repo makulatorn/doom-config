@@ -19,7 +19,13 @@
       :desc "Kill current buffer" "b q" #'kill-current-buffer)
 
 (after! meow
+  (meow-motion-define-key
+   '("o"   . other-window)
+   '("T"   . toggle-truncate-lines)))
+
+(after!  meow
   (meow-normal-define-key
+   '("o"   . other-window)
    '("F"   . +helm/projectile-find-file)
    '("X"   . meow-kill)
    '("S"   . +default/search-project)
@@ -38,7 +44,6 @@
    '("C-i" . backward-paragraph)
    '("C-k" . forward-paragraph)
    '("u"   . backward-word)
-   '("o"   . forward-word)
    '("<"   . mc/mark-previous-symbol-like-this)
    '(">"   . mc/mark-next-like-this)
    '("\""  . (lambda () (interactive) (my/meow-wrap-region "\"" "\"")))

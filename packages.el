@@ -102,3 +102,5 @@
 (package! diff-hl)
 
 (package! almost-mono-themes)
+
+(package! company-quickhelp)

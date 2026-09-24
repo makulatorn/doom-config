@@ -38,6 +38,7 @@
 (setq-local eldoc-echo-area-use-multiline-p t)
 (setq max-mini-window-height 0.3)
 (setq eldoc-echo-area-prefer-doc-buffer nil)
+(setq resize-mini-windows t)
 
 (use-package! apheleia
   :config

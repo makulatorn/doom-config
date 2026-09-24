@@ -4,6 +4,13 @@
 (add-hook 'text-mode-hook #'completion-preview-mode)
 (add-hook 'conf-mode-hook #'completion-preview-mode)
 
+(use-package! company-quickhelp
+  :after company
+  :config
+  (company-quickhelp-mode 1)
+  (setq company-quickhelp-delay 0.3
+        company-quickhelp-use-propertize t))
+
 (after! eglot
   (add-to-list 'eglot-ignored-server-capabilities :documentFormattingProvider))
 
